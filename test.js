@@ -1,6 +1,6 @@
-const form = document.querySelector('#form');
-const input = document.querySelector('#title');
-const list = document.querySelector('#list');
+const form = document.querySelector < HTMLFormElement > '#form';
+const input = document.querySelector < HTMLInputElement > '#title';
+const list = document.querySelector < HTMLUListElement > '#list';
 
 //처음 페이지 로딩시 로컬 저장소에서 TASKS에 대한 데이터호출
 let data = localStorage.getItem('TASKS');
@@ -32,6 +32,9 @@ function addListItem(task) {
 	const item = document.createElement('li');
 	const checkbox = document.createElement('input');
 	checkbox.type = 'checkbox';
+	//동적인 추가된 상태에서 change이벤트가 발생하지 않고 바로 새로고침되었을때 checked유무에 따라 속성, 스타일 변경
+	checkbox.checked = task.complete ? true : false;
+	item.style.textDecoration = task.complete ? 'line-through' : 'none';
 
 	checkbox.addEventListener('change', () => {
 		task.complete = checkbox.checked;
