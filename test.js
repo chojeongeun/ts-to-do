@@ -2,15 +2,9 @@ const form = document.querySelector < HTMLFormElement > '#form';
 const input = document.querySelector < HTMLInputElement > '#title';
 const list = document.querySelector < HTMLUListElement > '#list';
 
-//처음 페이지 로딩시 로컬 저장소에서 TASKS에 대한 데이터호출
-let data = localStorage.getItem('TASKS');
-//해당 데이터가 있으면 parsing 해서 tasks배열에 저장, 없으면 빈배열 저장
-let tasks = data ? JSON.parse(data) : [];
-
-//tasks에 배열값을 반복출력 (만약 저장소에 값이없으면 출력안됨)
+let tasks = JSON.parse(localStorage.getItem('TASKS')) || [];
 tasks.map((task) => addListItem(task));
 
-//Submit이벤트가 발생할때마다
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
 	if (input.value.trim() === '') return alert('할일을 입력하세요');
